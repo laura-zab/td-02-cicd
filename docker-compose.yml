@@ -1,0 +1,41 @@
+version: '3.7'
+
+services:
+    api:
+        build:
+          context: ./simpleapi
+        container_name: api
+        ports:
+          - 8080:8080
+        networks:
+          - app-network
+        depends_on:
+          - db
+
+    db:
+        build:
+          context: ./db
+        container_name: db
+        networks:
+          - app-network
+        volumes:
+          - sql-data:/var/lib/postgresql/data
+        env_file:
+          - .env
+
+    frontend:
+        build:
+          context: ./frontend
+        container_name: frontend
+        ports:
+          - 8070:80
+        networks:
+          - app-network
+        depends_on:
+          - api
+
+networks:
+  app-network:
+
+volumes:
+  sql-data:
