@@ -1,0 +1,10 @@
+- name: Run Proxy
+  docker_container:
+    name: proxy
+    image:  lzablit1/td-02-cicd-proxy:1.0
+    ports: "80:80"
+    networks:
+      - name: app-network
+    pull: true
+    recreate: true
+    platform: linux/amd64

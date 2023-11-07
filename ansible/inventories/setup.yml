@@ -1,0 +1,7 @@
+all:
+  vars:
+    ansible_user: centos
+    ansible_ssh_private_key_file: /Users/Laura_1/Desktop/EPF5A/S9/DevOps/id_rsa
+  children:
+    prod:
+      hosts: laura.zablit.takima.cloud

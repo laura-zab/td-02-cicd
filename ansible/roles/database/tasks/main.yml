@@ -1,0 +1,13 @@
+- name: Run Database
+  docker_container:
+    name: db
+    image:  lzablit1/td-02-cicd-db:1.0
+    networks:
+      - name: app-network
+    env:
+      POSTGRES_DB: "db"
+      POSTGRES_USER: "usr"
+      POSTGRES_PASSWORD: "pwd"
+    pull: true
+    recreate: true
+    platform: linux/amd64

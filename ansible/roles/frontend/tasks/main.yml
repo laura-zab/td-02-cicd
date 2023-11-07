@@ -1,0 +1,11 @@
+- name: Run Frontend
+  docker_container:
+    name: frontend
+    image:  lzablit1/td-02-cicd-frontend:1.0
+    ports: "8082:8082"
+    networks:
+      - name: app-network
+    state: started
+    pull: true
+    recreate: true
+    platform: linux/amd64

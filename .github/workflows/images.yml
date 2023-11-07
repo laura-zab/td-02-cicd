@@ -42,7 +42,16 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           # relative path to the place where source code with Dockerfile is located
-          context: ./frontend
+          context: ./proxy
+          # Note: tags has to be all lower-case
+          tags: ${{ vars.DOCKERHUB_USR }}/tp-devops-proxy:1.0
+          push: ${{ github.ref == 'refs/heads/main' }}
+
+      - name: Build image and push frontend
+        uses: docker/build-push-action@v3
+        with:
+          # relative path to the place where source code with Dockerfile is located
+          context: ./devops-front
           # Note: tags has to be all lower-case
           tags: ${{ vars.DOCKERHUB_USR }}/tp-devops-frontend:1.0
           push: ${{ github.ref == 'refs/heads/main' }}

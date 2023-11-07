@@ -11,6 +11,7 @@ services:
           - app-network
         depends_on:
           - db
+        platform: linux/amd64
 
     db:
         build:
@@ -22,17 +23,31 @@ services:
           - sql-data:/var/lib/postgresql/data
         env_file:
           - .env
+        platform: linux/amd64
 
-    frontend:
+    proxy:
         build:
-          context: ./frontend
-        container_name: frontend
+          context: proxy
+        container_name: proxy
         ports:
-          - 8070:80
+          - 80:80
         networks:
           - app-network
         depends_on:
           - api
+        platform: linux/amd64
+
+    frontend:
+      build:
+        context: ./devops-front
+      container_name: frontend
+      ports:
+        - 8082:80
+      networks:
+        - app-network
+      depends_on:
+        - api
+      platform: linux/amd64
 
 networks:
   app-network:
