@@ -5,7 +5,6 @@
     ports: "8082:8082"
     networks:
       - name: app-network
-    state: started
     pull: true
     recreate: true
     platform: linux/amd64
